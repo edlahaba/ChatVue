@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
-  channel_prefix: ChatVue_production
+  url: redis://redistogo:e337c5293b1513391e37a90ae0393440@angelfish.redistogo.com:10916/
+#  channel_prefix: ChatVue_production
