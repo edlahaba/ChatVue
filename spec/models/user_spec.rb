@@ -10,28 +10,28 @@ RSpec.describe User, type: :model do
 
   describe ".save" do
     context "Save user without a username" do
-      it "returns false" do 
+      it "Returns false" do 
         @user.username = nil
         expect(@user.valid?).to be_falsey
       end
     end
 
     context "Save user without a minimum lenght of characters" do
-      it "returns false" do 
+      it "Returns false" do 
         @user.username = "a"
         expect(@user.valid?).to be_falsey
       end
     end
 
     context "Username cant be duplicated" do
-      it "returns false" do 
+      it "Returns false" do 
         @user.save
         expect(@other_user.valid?).to be_falsey
       end
     end
 
     context "Save username" do
-      it "returns username in lowercase" do
+      it "Returns username in lowercase" do
         username_lower_case = @user.username.downcase
         @user.save
         @user.reload
@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
     end
 
     context "User is saved generates a token" do
-      it "returns string" do
+      it "Returns string" do
         @user.token = "MANUAL_TOKEN"
         after_token = @user.token
         @user.save
@@ -51,7 +51,7 @@ RSpec.describe User, type: :model do
     end
 
     context "Save a user with usernames with spaces" do
-      it "returns false" do
+      it "Returns false" do
         @user.username = "U S E R        N A M E"
         expect(@user.valid?).to be_falsey
       end

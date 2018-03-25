@@ -43,7 +43,7 @@ RSpec.describe "Chats", type: :feature, js: true do
     end
 
     context "When a message is wrote 30 times" do
-      it "it displayed the last 20 messages" do
+      it "It is displayed the last 20 messages" do
         30.times do
           fill_in('message-box', with: Faker::Lorem.sentence )
           click_on('message-button')
@@ -83,12 +83,12 @@ RSpec.describe "Chats", type: :feature, js: true do
         expect(page).to have_css('.room-name', text: 'example room')
         click_button('example room')
         room_id = Room.find_by(name: 'example room').id.to_s
-        other_room_id = Room.find_by(name: 'example room').id.to_s
+        other_room_id = Room.find_by(name: 'other room').id.to_s
         Room.get_last_messages(room_id).each do |message|
            expect(page).to have_css('li', text: message.content)
         end
         Room.get_last_messages(other_room_id).each do |message|
-           expect(page).not_to have_no_css('li', text: message.content)
+           expect(page).to have_no_css('li', text: message.content)
         end 
       end
     end

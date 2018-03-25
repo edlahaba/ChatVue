@@ -3,18 +3,23 @@ class UsersController < ApplicationController
   def create
    if received_username.empty?
      new_user = User.new
-     #render :json => new_user.valid? ? new_user : {errors: new_user.errors.full_messages}, status: :unprocessable_entity
-     print_model(new_user)
+     if new_user.valid?
+       render json: new_user
+     else
+       render json: {errors: new_user.errors.full_messages}, status: 422
+     end
    else
      users = User.where(username: received_username)
      if users.any?
-        #render :json => users.first
-        print_model(users.first)
+        render :json => users.first
      else
         new_user = User.new(username: received_username)
         new_user.save
-        print_model(new_user)
-        #render :json => new_user.valid? ? new_user : {errors: new_user.errors.full_messages}, status: :unprocessable_entity
+        if new_user.valid?
+          render json: new_user
+        else
+          render json: {errors: new_user.errors.full_messages}, status: 422
+        end
      end
    end
   end
@@ -29,10 +34,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-    def print_model(user)
-      render :json => user.valid? ? user : {errors: user.errors.full_messages}
-    end
 
     def received_username
       params[:username]

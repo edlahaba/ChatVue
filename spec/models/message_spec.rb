@@ -10,21 +10,21 @@ RSpec.describe Message, type: :model do
 
   describe ".save" do
     context "When is saved a empty content" do
-      it "returns false" do
+      it "Returns false" do
         @message.content = ""
         expect(@message.valid?).to be_falsey
       end 
     end
 
     context "When is saved with filled content" do
-      it "returns true" do
+      it "Returns true" do
         @message.content = "a"
         expect(@message.valid?).to be_truthy
       end 
     end
 
     context "When is saved a string with more than one whitespace" do
-      it "replace it whith a one whitespace" do
+      it "Replace it whith a one whitespace" do
         @message.content = "    Hello           world        ruby  "
         @message.save
         @message.reload

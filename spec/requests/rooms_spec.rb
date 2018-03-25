@@ -40,6 +40,13 @@ RSpec.describe "Rooms", type: :feature, js: true  do
     end
 
     context "When click room name" do
+      before do
+        expect(page).to have_text('Add room')
+        click_button('Add room')
+        fill_in('My room', with: 'example room')
+        click_button('Save')
+        expect(page).to have_no_css('#addRoomModal')
+      end
       it "Display the chat" do
         expect(page).to have_css('.room-name', text: 'example room')
         click_button('example room')

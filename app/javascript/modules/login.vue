@@ -28,15 +28,11 @@
          this.errors = [];
          this.$http.post('/users', {
             username: this.username
-         }).then(function(response){ 
-            if(response.body['errors'] == null){
+         }).then(function(response){
               sessionStorage.setItem('token', response.body['token']);
-              this.$router.push("rooms")
-            }else{
-              this.errors = response.body['errors'];
-            }            
+              this.$router.push("rooms")         
          }, function(response){
-            //
+              this.errors = response.body['errors'];
          });
       }
     },

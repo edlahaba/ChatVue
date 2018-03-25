@@ -9,28 +9,28 @@ RSpec.describe Room, type: :model do
 
   describe ".save" do
     context "Save room without name" do
-      it "returns false" do
+      it "Returns false" do
         @room.name = nil
         expect(@room.valid?).to be_falsey
       end
     end
 
     context "Save a room without minimum length of characters" do
-      it "returns false" do
+      it "Returns false" do
         @room.name = ""
         expect(@room.valid?).to be_falsey
       end
     end
 
     context "Room name cant be duplicated" do
-      it "returns false" do
+      it "Returns false" do
         @room.save
         expect(@other_room.valid?).to be_falsey
       end
     end
 
     context "Save room name" do
-      it "returns room name in lowercase" do
+      it "Returns room name in lowercase" do
         room_lower_case = @room.name.downcase
         @room.save
         @room.reload
@@ -39,7 +39,7 @@ RSpec.describe Room, type: :model do
     end
 
     context "Save a room name with spaces" do
-      it "return true" do
+      it "Return true" do
         @room.name = "R O O M N A M E"
         expect(@room.valid?).to be_truthy
       end
