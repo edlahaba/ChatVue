@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+En este [enlace](https://glacial-brook-46000.herokuapp.com/) se encuentra publicada la aplicación en heroku.
 
-Things you may want to cover:
+#TECNOLOGÍAS USADAS
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Rails
+* Mongoid
+* Vue
+* Rspec
+* Action Cable
