@@ -12,6 +12,10 @@ class Room
     Message.where(room_id: room_id).order_by(:created_at => :desc).to_a.take(20).reverse
   end
 
+  def self.exists_room?(room_id)
+    Room.where(id: room_id).any? 
+  end
+
   private
 
     def downcase_roomname

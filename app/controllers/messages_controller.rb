@@ -1,17 +1,26 @@
 class MessagesController < ApplicationController
   def create
-    token = params[:token]
-    room_id = params[:room_id]
-    content = params[:content]
-
-    if !Room.where(id: room_id).any? || !User.where(token: token).any? || content.blank?
+    if valid_message?
       render :json => {errors: "error"}, status: :unprocessable_entity
-    else  
-      message = Message.new(room: Room.find(room_id), user: User.where(token: token).first)
-      message.content = content
-      message.save
-      render :json => message
+    else
+      render :json => create_message
     end
     
   end
+
+  private
+
+    def valid_message?
+      !Room.exists_room?(params[:room_id]) || 
+                         !User.exists_user(params[:token]) || 
+                         params[:content].blank?
+    end
+
+    def create_message
+      message = Message.create_message(Room.find(params[:room_id]), 
+                             User.get_user(params[:token]),
+                             params[:content])
+      message.save
+    end
+
 end

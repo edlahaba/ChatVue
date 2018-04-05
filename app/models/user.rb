@@ -12,6 +12,14 @@ class User
   index({ username: 1 }, { unique: true, name: "username_index" })
   index({ token: 1 }, { unique: true, name: "token_index" })
 
+  def self.exists_user(token)
+    User.where(token: token).any?
+  end
+
+  def self.get_user(token)
+    User.where(token: token).first
+  end
+
   private
 
     def downcase_username
